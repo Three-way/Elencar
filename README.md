@@ -53,5 +53,5 @@ E Evelyn assumirá a posição de Scrum Master e irá atuar com o banco de dados
     </p>
     <h5>É o nosso maior entendedor e desenvolvedor backend de C# e ASP Net</h5>
 
-<p align="center"><img src="/img/gama-logo.png" width="100"></p>
+<p align="center"><img src="/img/gama-logo.png" width="120"></p>
 <p align="center"><img src="/img/avanade-logo.png" width="100"></p>

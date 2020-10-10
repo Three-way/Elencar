@@ -2,9 +2,9 @@
 
 namespace Elencar.Domain.Entities
 {
-    public class Genre
+    public class Genrer
     {
-        public Genre(string descricao)
+        public Genrer(string descricao)
         {
             Descricao = descricao;
         }

@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\wesll\\.nuget\\packages\\": {}
+    "C:\\Users\\Evelyn\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\wesll\\source\\repos\\Elencar\\src\\Modules\\Elencar.Api\\Elencar.Api.csproj",
+      "projectUniqueName": "C:\\Users\\Evelyn\\Desktop\\ProjetoAvanade\\Elencar\\src\\Modules\\Elencar.Api\\Elencar.Api.csproj",
       "projectName": "Elencar.Api",
-      "projectPath": "C:\\Users\\wesll\\source\\repos\\Elencar\\src\\Modules\\Elencar.Api\\Elencar.Api.csproj",
-      "packagesPath": "C:\\Users\\wesll\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\wesll\\source\\repos\\Elencar\\src\\Modules\\Elencar.Api\\obj\\",
+      "projectPath": "C:\\Users\\Evelyn\\Desktop\\ProjetoAvanade\\Elencar\\src\\Modules\\Elencar.Api\\Elencar.Api.csproj",
+      "packagesPath": "C:\\Users\\Evelyn\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Evelyn\\Desktop\\ProjetoAvanade\\Elencar\\src\\Modules\\Elencar.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\wesll\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Evelyn\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

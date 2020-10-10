@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "643xUKSJGS+IE+Yli6LcaedsbiMMDHk1cof15u6P86GJydhWuXHGpvQ+QPxmaSbe1EthA9UQVkN2oUJ9REUwsQ==",
+  "dgSpecHash": "d89kfnd+/bdCa/Q7yVaBM12FhpPuUc4Q0bqU5SV5PInryDXifKCuc+5QBHsJUuqP5lFcwvJCbDCUtV34kKWw1A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Evelyn\\Desktop\\ProjetoAvanade\\Elencar\\src\\Modules\\Elencar.Api\\Elencar.Api.csproj",
+  "projectFilePath": "C:\\Users\\wesll\\source\\repos\\Elencar\\src\\Modules\\Elencar.Api\\Elencar.Api.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

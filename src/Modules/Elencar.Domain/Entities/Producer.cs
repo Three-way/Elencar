@@ -4,16 +4,15 @@ using System.Text;
 
 namespace Elencar.Domain.Entities
 {
-    public class Admin
+    public class Producer
     {
-        public Admin(string name)
+        public Producer(string name)
 
         {
-            Id = Guid.NewGuid();
-            Name = name;       
+            Name = name;    
         }
 
-        public Guid Id { get; private set; }
+        public int Id { get; private set; }
         public string Name { get; private set; }
 
 

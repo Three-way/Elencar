@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Evelyn\\Desktop\\ProjetoAvanade\\Elencar\\src\\Modules\\Elencar.Infra.Repositories\\Elencar.Infra.Repositories.csproj": {}
+    "C:\\Users\\wesll\\source\\repos\\Elencar\\src\\Modules\\Elencar.Infra.Repositories\\Elencar.Infra.Repositories.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Evelyn\\Desktop\\ProjetoAvanade\\Elencar\\src\\Modules\\Elencar.Domain\\Elencar.Domain.csproj": {
+    "C:\\Users\\wesll\\source\\repos\\Elencar\\src\\Modules\\Elencar.Domain\\Elencar.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Evelyn\\Desktop\\ProjetoAvanade\\Elencar\\src\\Modules\\Elencar.Domain\\Elencar.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\wesll\\source\\repos\\Elencar\\src\\Modules\\Elencar.Domain\\Elencar.Domain.csproj",
         "projectName": "Elencar.Domain",
-        "projectPath": "C:\\Users\\Evelyn\\Desktop\\ProjetoAvanade\\Elencar\\src\\Modules\\Elencar.Domain\\Elencar.Domain.csproj",
-        "packagesPath": "C:\\Users\\Evelyn\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Evelyn\\Desktop\\ProjetoAvanade\\Elencar\\src\\Modules\\Elencar.Domain\\obj\\",
+        "projectPath": "C:\\Users\\wesll\\source\\repos\\Elencar\\src\\Modules\\Elencar.Domain\\Elencar.Domain.csproj",
+        "packagesPath": "C:\\Users\\wesll\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\wesll\\source\\repos\\Elencar\\src\\Modules\\Elencar.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Evelyn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\wesll\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -56,17 +56,17 @@
         }
       }
     },
-    "C:\\Users\\Evelyn\\Desktop\\ProjetoAvanade\\Elencar\\src\\Modules\\Elencar.Infra.Repositories\\Elencar.Infra.Repositories.csproj": {
+    "C:\\Users\\wesll\\source\\repos\\Elencar\\src\\Modules\\Elencar.Infra.Repositories\\Elencar.Infra.Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Evelyn\\Desktop\\ProjetoAvanade\\Elencar\\src\\Modules\\Elencar.Infra.Repositories\\Elencar.Infra.Repositories.csproj",
+        "projectUniqueName": "C:\\Users\\wesll\\source\\repos\\Elencar\\src\\Modules\\Elencar.Infra.Repositories\\Elencar.Infra.Repositories.csproj",
         "projectName": "Elencar.Infra.Repositories",
-        "projectPath": "C:\\Users\\Evelyn\\Desktop\\ProjetoAvanade\\Elencar\\src\\Modules\\Elencar.Infra.Repositories\\Elencar.Infra.Repositories.csproj",
-        "packagesPath": "C:\\Users\\Evelyn\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Evelyn\\Desktop\\ProjetoAvanade\\Elencar\\src\\Modules\\Elencar.Infra.Repositories\\obj\\",
+        "projectPath": "C:\\Users\\wesll\\source\\repos\\Elencar\\src\\Modules\\Elencar.Infra.Repositories\\Elencar.Infra.Repositories.csproj",
+        "packagesPath": "C:\\Users\\wesll\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\wesll\\source\\repos\\Elencar\\src\\Modules\\Elencar.Infra.Repositories\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Evelyn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\wesll\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -79,8 +79,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Evelyn\\Desktop\\ProjetoAvanade\\Elencar\\src\\Modules\\Elencar.Domain\\Elencar.Domain.csproj": {
-                "projectPath": "C:\\Users\\Evelyn\\Desktop\\ProjetoAvanade\\Elencar\\src\\Modules\\Elencar.Domain\\Elencar.Domain.csproj"
+              "C:\\Users\\wesll\\source\\repos\\Elencar\\src\\Modules\\Elencar.Domain\\Elencar.Domain.csproj": {
+                "projectPath": "C:\\Users\\wesll\\source\\repos\\Elencar\\src\\Modules\\Elencar.Domain\\Elencar.Domain.csproj"
               }
             }
           }

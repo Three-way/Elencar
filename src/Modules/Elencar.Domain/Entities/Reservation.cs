@@ -6,7 +6,7 @@ namespace Elencar.Domain.Entities
 {
     class Reservation
     {
-        public Reservation(DateTime start, DateTime end, List<Genrer> genres, Producer producer)
+        public Reservation(DateTime start, DateTime end, List<Genre> genres, Producer producer)
         {
             Start = start;
             End = end;
@@ -19,7 +19,7 @@ namespace Elencar.Domain.Entities
         public int Id { get; private set; }
         public DateTime Start { get; private set; }
         public DateTime End { get; private set; }
-        public List<Genrer> Genres { get; private set; }
+        public List<Genre> Genres { get; private set; }
         public Producer Producer { get; private set; }
         public bool Status { get; private set; }
         public DateTime CreatedAt { get; private set; }

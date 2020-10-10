@@ -6,7 +6,7 @@ namespace Elencar.Domain.Entities
 {
     class Actor
     {
-        public Actor(string name, double cache, List<Genrer> genrer, List<Reservation> reservation)
+        public Actor(string name, double cache, List<Genre> genrer, List<Reservation> reservation)
         {
             Name = name;
             Cache = cache;
@@ -20,7 +20,7 @@ namespace Elencar.Domain.Entities
 
         public double Cache { get; private set; }
 
-        public List<Genrer> Genrer { get; private set; }
+        public List<Genre> Genrer { get; private set; }
 
         public List<Reservation> Reservation { get; private set; }
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Elencar.Domain.Entities
 {
-    class Reservation
+    public class Reservation
     {
         public Reservation(DateTime start, DateTime end, List<Genre> genres, Producer producer)
         {

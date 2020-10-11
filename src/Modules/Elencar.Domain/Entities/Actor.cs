@@ -4,32 +4,28 @@ using System.Text;
 
 namespace Elencar.Domain.Entities
 {
-    class Actor
+    public class Actor : User
     {
-        public Actor(string name, double cache, List<Genre> genrer, List<Reservation> reservation)
+        public Actor(string name, string email, string password, Perfil perfil, double cache, List<Genre> genre, List<Reservation> reservation)
+            : base(name, email, password, perfil)
         {
-            Name = name;
             Cache = cache;
-            Genrer = genrer;
+            Genre = genre;
             Reservation = reservation;
         }
 
-        public int Id { get; private set; }
-
-        public string Name { get; private set; }
-
         public double Cache { get; private set; }
 
-        public List<Genre> Genrer { get; private set; }
+        public List<Genre> Genre { get; private set; }
 
         public List<Reservation> Reservation { get; private set; }
 
-        public bool IsValid()
+        public override bool IsValid()
         {
             var valid = true;
 
-            if ((string.IsNullOrEmpty(Name)) || (Cache < 0d) || 
-                    (Genrer.Count <=0) || (Reservation.Count <= 0))
+            if (!base.IsValid() ||(Cache < 0d) || 
+                    (Genre.Count <=0) || (Reservation.Count <= 0))
                    valid = false;
             return valid;
         }

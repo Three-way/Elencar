@@ -4,31 +4,17 @@ using System.Text;
 
 namespace Elencar.Domain.Entities
 {
-    public class Producer
+    public class Producer : User
     {
-        public Producer(string name)
+        public Producer(string name, string email, string password, Perfil perfil) 
+            : base(name, email, password, perfil)
 
         {
-            Name = name;    
+             
         }
 
-        public int Id { get; private set; }
-        public string Name { get; private set; }
 
-
-
-
-        public bool IsValid()
-        {
-            var valid = true;
-
-            if (string.IsNullOrEmpty(Name))
-            {
-                valid = false;
-            }
-
-            return valid;
-        }
+        
     }
 
     

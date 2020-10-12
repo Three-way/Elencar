@@ -6,6 +6,14 @@ namespace Elencar.Domain.Entities
 {
     public class Actor : User
     {
+        public Actor(int id, string name, string email, string password, Perfil perfil, double cache, List<Genre> genre, List<Reservation> reservation)
+            : base(id,name, email, password, perfil)
+        {
+            Cache = cache;
+            Genre = genre;
+            Reservation = reservation;
+        }
+
         public Actor(string name, string email, string password, Perfil perfil, double cache, List<Genre> genre, List<Reservation> reservation)
             : base(name, email, password, perfil)
         {

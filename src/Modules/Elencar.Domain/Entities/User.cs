@@ -6,6 +6,11 @@ namespace Elencar.Domain.Entities
 {
     public abstract class User : IUser
     {
+        protected User(int id, string name, string email, string password, Perfil perfil): this(name, email, password, perfil)
+        {
+            Id = id;
+        }
+
         protected User(string name, string email, string password, Perfil perfil)
         {
             Name = name;
@@ -35,10 +40,12 @@ namespace Elencar.Domain.Entities
             var valid = true;
 
             if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Email)
-                    || string.IsNullOrEmpty(Password) || Perfil.IsDefined(typeof(Perfil), Perfil))
+                    || string.IsNullOrEmpty(Password) || !Perfil.IsValid())
             {
                 valid = false;
             }
+
+
 
             return valid;
         }

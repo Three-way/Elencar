@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Elencar.Application.AppElencar.Interfaces;
+using Elencar.Infra.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace Elencar.Api
 {
@@ -25,6 +28,23 @@ namespace Elencar.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSwaggerGen(c => {
+
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo
+                    {
+                        Title = "Elencar",
+                        Version = "v1",
+                        Description = "Api do treinamento Avanade/Gama Academy",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "ThreeWayHandshake",
+                            Url = new Uri("https://github.com/Three-way/Elencar")
+                        }
+                    });
+            });
+
+            RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +63,17 @@ namespace Elencar.Api
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Elencar");
+            });
+
+        }
+
+        void RegisterServices(IServiceCollection services)
+        {
+            new RootBootstrapper().RootRegisterServices(services);
         }
     }
 }

@@ -8,9 +8,10 @@ namespace Elencar.Domain.Interfaces.Repositories
 {
     public interface IProducerRepository
     {
-        Producer Insert(Producer producer);
-        Task<Producer> GetByIdAsync(int id);
-
         IEnumerable<Producer> Get();
+        Task<Producer> GetByIdAsync(int id);
+        Task<Producer> Insert(Producer producer);
+        void Delete(int id);
+        Producer Update(int id);
     }
 }

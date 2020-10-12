@@ -19,11 +19,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.1 - Repositories", "3.1 -
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.2 - IoC", "3.2 - IoC", "{A3DED855-8B80-4F18-86D1-B0C09A9C1E4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elencar.Infra.Repositories", "src\Modules\Elencar.Infra.Repositories\Elencar.Infra.Repositories.csproj", "{F9C40B58-A101-4451-B050-C9D822704A81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elencar.Infra.Repositories", "src\Modules\Elencar.Infra.Repositories\Elencar.Infra.Repositories.csproj", "{F9C40B58-A101-4451-B050-C9D822704A81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elencar.Application", "src\Modules\Elencar.Application\Elencar.Application.csproj", "{8AB88684-A51A-49F3-9CC8-17D5B9DD62AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elencar.Application", "src\Modules\Elencar.Application\Elencar.Application.csproj", "{8AB88684-A51A-49F3-9CC8-17D5B9DD62AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elencar.Api", "src\Modules\Elencar.Api\Elencar.Api.csproj", "{C7D9CFC4-0799-4C62-98E7-E2CC83379BA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elencar.Api", "src\Modules\Elencar.Api\Elencar.Api.csproj", "{C7D9CFC4-0799-4C62-98E7-E2CC83379BA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elencar.Infra.IoC", "src\Modules\Elencar.Infra.IoC\Elencar.Infra.IoC.csproj", "{78EEEB26-3B67-46F3-AB1D-580D4C7E9D64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{C7D9CFC4-0799-4C62-98E7-E2CC83379BA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7D9CFC4-0799-4C62-98E7-E2CC83379BA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7D9CFC4-0799-4C62-98E7-E2CC83379BA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78EEEB26-3B67-46F3-AB1D-580D4C7E9D64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78EEEB26-3B67-46F3-AB1D-580D4C7E9D64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78EEEB26-3B67-46F3-AB1D-580D4C7E9D64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78EEEB26-3B67-46F3-AB1D-580D4C7E9D64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{F9C40B58-A101-4451-B050-C9D822704A81} = {39D4FD99-405F-4A8A-AFA7-04404F729C61}
 		{8AB88684-A51A-49F3-9CC8-17D5B9DD62AC} = {989B5648-1B5D-4217-B1D5-308606CFB369}
 		{C7D9CFC4-0799-4C62-98E7-E2CC83379BA0} = {7EA9080D-3D1B-4DC0-BC90-F0C212F88F28}
+		{78EEEB26-3B67-46F3-AB1D-580D4C7E9D64} = {A3DED855-8B80-4F18-86D1-B0C09A9C1E4D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F139B550-92A8-4E41-8547-3FD8F95B2FE3}

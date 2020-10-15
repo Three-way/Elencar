@@ -11,44 +11,44 @@ namespace Elencar.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProducerController : ControllerBase
+    public class ActorController : ControllerBase
     {
-        private readonly IProducerAppService _producerAppService;
+        private readonly IActorAppService _actorAppService;
 
-        public ProducerController(IProducerAppService producerAppService)
+        public ActorController(IActorAppService actorAppService)
         {
-            _producerAppService = producerAppService;
+            _actorAppService = actorAppService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ProducerInput producerInput)
+        public async Task<IActionResult> Post([FromBody] ActorInput actorInput)
         {
-            var item = await _producerAppService
-                                    .Insert(producerInput)
+            var item = await _actorAppService
+                                    .Insert(actorInput)
                                     .ConfigureAwait(false);
             if (item == null)
             {
-                return BadRequest("Producer Invalid");
+                return BadRequest("Actor Invalid");
             }
-            return Created("Producer Created",item);
+            return Created("Actor Created",item);
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(_producerAppService.Get().ToList());
+            return Ok(_actorAppService.Get());
         }
 
         [HttpGet("{Id}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
-            return Ok(await _producerAppService.GetbyIdAsync(id).ConfigureAwait(false));
+            return Ok(await _actorAppService.GetByIdAsync(id).ConfigureAwait(false));
         }
 
         [HttpDelete("{Id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            _producerAppService.Delete(id);
+            _actorAppService.Delete(id);
             return NoContent();
         }
     }

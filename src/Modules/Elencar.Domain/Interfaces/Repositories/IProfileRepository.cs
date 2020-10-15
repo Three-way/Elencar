@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Elencar.Domain.Interfaces.Repositories
 {
-    public interface IProducerRepository
+    public interface IProfileRepository
     {
-        IEnumerable<Producer> Get();
-        Task<Producer> GetByIdAsync(int id);
-        Task<Producer> Insert(Producer producer);
+        Task<IEnumerable<Profile>> Get();
+        Task<Profile> GetByIdAsync(int id);
+        Task<Profile> Insert(Profile profile);
+        Task<Profile> Update(Profile profile);
         void Delete(int id);
-        Producer Update(int id);
     }
 }

@@ -11,8 +11,8 @@ namespace Elencar.Infra.IoC.Application
     {
         internal void ChildServiceRegister(IServiceCollection services)
         {
-            services.AddScoped<IProducerAppService, ProducerAppService>();
-            services.AddScoped<IPerfilAppService, PerfilAppService>();
+            services.AddScoped<IActorAppService, ActorAppService>();
+            services.AddScoped<IProfileAppService, ProfileAppService>();
         }
     }
 }

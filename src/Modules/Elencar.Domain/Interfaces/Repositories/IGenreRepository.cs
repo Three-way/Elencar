@@ -8,8 +8,10 @@ namespace Elencar.Domain.Interfaces.Repositories
 {
     public interface IGenreRepository
     {
-        int Insert(Genre genre);
+        Task<IEnumerable<Genre>> Get();
         Task<Genre> GetByIdAsync(int id);
-        IEnumerable<Genre> Get();
+        Task<Genre> Insert(Genre genre);
+        Task<Genre> Update(Genre genre);
+        void Delete(int id);
     }
 }

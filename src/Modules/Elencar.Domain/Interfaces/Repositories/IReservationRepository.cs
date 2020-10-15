@@ -8,10 +8,10 @@ namespace Elencar.Domain.Interfaces.Repositories
 {
     public interface IReservationRepository
     {
-        int Insert(Reservation reservation);
+        Task<IEnumerable<Reservation>> Get();
         Task<Reservation> GetByIdAsync(int id);
-        IEnumerable<Reservation> Get();
+        Task<Reservation> Insert(Reservation reservation);
+        Task<Reservation> Update(Reservation reservation);
         void Delete(Reservation reservation);
-        int Update(Reservation reservation);
     }
 }

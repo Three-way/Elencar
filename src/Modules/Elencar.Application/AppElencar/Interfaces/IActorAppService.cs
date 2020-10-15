@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Elencar.Application.AppElencar.Interfaces
 {
-    public interface IProducerAppService
+    public interface IActorAppService
     {
-        IEnumerable<Producer> Get();
-        Task<Producer> GetbyIdAsync(int id);
-        Task<Producer> Insert(ProducerInput producerInput);
+        Task<IEnumerable<Actor>> Get();
+        Task<Actor> GetByIdAsync(int id);
+        Task<Actor> Insert(ActorInput actorInput);
+        Task<Actor> Update(ActorInput actorInput);
         void Delete(int id);
     }
 }

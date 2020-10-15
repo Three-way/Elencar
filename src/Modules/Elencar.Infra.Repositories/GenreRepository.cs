@@ -85,7 +85,7 @@ namespace Elencar.Infra.Repositories
 
                             var genre = new Genre()
                             {
-                                Id = Int32.Parse(reader["userId"].ToString()),
+                                Id = id,
                                 Description = reader["description"].ToString(),
                                 
                             };

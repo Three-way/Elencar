@@ -13,10 +13,12 @@ namespace Elencar.Infra.Repositories
     public class ActorRepository : IActorRepository
     {
         private readonly IConfiguration _configuration;
+        private readonly IProfileRepository _profileRepository;
 
-        public ActorRepository(IConfiguration configuration)
+        public ActorRepository(IConfiguration configuration, IProfileRepository profileRepository)
         {
             _configuration = configuration;
+            _profileRepository = profileRepository;
         }
 
         public async Task<IEnumerable<Actor>> Get(int? quantity = 10, int? idGenre = null, DateTime? startDate = null
@@ -179,17 +181,14 @@ namespace Elencar.Infra.Repositories
                                                 Email,
                                                 Password,
                                                 isProducer,
-                                                Status,
-                                                CreatedAt,
-                                                UpdatedAt)
+                                                Status
+                                                )
                                            VALUES (
                                                 @name,
                                                 @email,
                                                 @password,
-                                                @isProducer,
-                                                1,
-                                                GetDate(),
-                                                GetDate()
+                                                0,
+                                                1
                                             ); SELECT scope_Identity();";
 
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
@@ -199,11 +198,25 @@ namespace Elencar.Infra.Repositories
                         cmd.Parameters.AddWithValue("name", actor.Name);
                         cmd.Parameters.AddWithValue("email", actor.Email);
                         cmd.Parameters.AddWithValue("password", actor.Password);
-                        cmd.Parameters.AddWithValue("isProducer", actor.IsProducer);
+                        //cmd.Parameters.AddWithValue("isProducer", actor.IsProducer);
 
                         con.Open();
-                        var id = cmd.ExecuteScalar();
-                        return await GetByIdAsync(int.Parse(id.ToString()));
+                        var id = await cmd.ExecuteScalarAsync().ConfigureAwait(false);
+
+                        var profile = new Profile() { Bio = actor.Profile.Bio, Fee = actor.Profile.Fee
+                                                            , Actor = new Actor() { Id = int.Parse(id.ToString()) }
+                                                            , Genre = new Genre() { Id = actor.Profile.Genre.Id }    };
+
+                        var newProfile = await _profileRepository.Insert(profile);
+
+                        actor.Id = int.Parse(id.ToString());
+                        actor.Profile.Bio = profile.Bio;
+                        actor.Profile.Fee = profile.Fee;
+                        actor.Status = true;
+                        actor.CreatedAt = DateTime.Now;
+                        actor.UpdatedAt = DateTime.Now;
+                        //return await GetByIdAsync(int.Parse(id.ToString()));
+                        return actor;
                     }
                 }
             }
@@ -221,7 +234,7 @@ namespace Elencar.Infra.Repositories
             {
                 using (var con = new SqlConnection(_configuration["ConnectionString"]))
                 {
-                    var sqlCmd = $@"UPDATE User set
+                    var sqlCmd = $@"UPDATE [dbo].[User] set
                                                 Name = @name,
                                                 Email = @email,
                                                 Password = @password,
@@ -242,10 +255,10 @@ namespace Elencar.Infra.Repositories
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                throw;
+                Console.WriteLine(e.Message);
+                return default;
             }
 
         }

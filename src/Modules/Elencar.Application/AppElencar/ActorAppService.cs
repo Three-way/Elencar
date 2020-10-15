@@ -36,7 +36,10 @@ namespace Elencar.Application.AppElencar
         public async Task<Actor> Insert(ActorInput actorInput)
         {
 
-            var actor = new Actor() { Name = actorInput.Name, Email = actorInput.Email, Password = actorInput.Password };
+            var actor = new Actor() { Name = actorInput.Name, Email = actorInput.Email, Password = actorInput.Password
+                                            , Profile = new Profile() { Bio = actorInput.Bio, Fee = actorInput.Fee
+                                            , Genre = new Genre() { Id = actorInput.GenreId} }
+            };
 
 
             return await _actorRepository.Insert(actor);

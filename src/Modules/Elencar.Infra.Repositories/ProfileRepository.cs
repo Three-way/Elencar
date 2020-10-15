@@ -13,10 +13,12 @@ namespace Elencar.Infra.Repositories
     public class ProfileReopository : IProfileRepository
     {
         private readonly IConfiguration _configuration;
+        private readonly IGenreRepository _genreRepository;
 
-        public ProfileReopository(IConfiguration configuration)
+        public ProfileReopository(IConfiguration configuration, IGenreRepository genreRepository)
         {
             _configuration = configuration;
+            _genreRepository = genreRepository;
         }
 
         
@@ -30,9 +32,9 @@ namespace Elencar.Infra.Repositories
                     var profileList = new List<Profile>();
 
                     var sqlCmd = $@"SELECT p.id as profileId, p.bio, p.fee, u.name, u.email, g.description
-                                            FROM Profile p
-                                            JOIN User u on u.id = p.user_id
-                                            JOIN Genre g on g.id = p.genre_id
+                                            FROM [dbo].[Profile] p
+                                            JOIN [dbo].[User] u on u.id = p.user_id
+                                            JOIN [dbo].[Genre] g on g.id = p.genre_id
                                             WHERE p.status = 1 AND u.status = 1";
 
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
@@ -82,10 +84,10 @@ namespace Elencar.Infra.Repositories
                 using (var con = new SqlConnection(_configuration["ConnectionString"]))
                 {
                     var sqlCmd = $@"SELECT p.id as profileId, p.bio, p.fee, u.name, u.email, g.description
-                                            FROM Profile p
-                                            JOIN User u on u.id = p.user_id and u.status = 1
-                                            JOIN Genre g on g.id = p.genre_id
-                                            WHERE Id = {id} AND p.status = 1";
+                                            FROM [dbo].[Profile] p
+                                            JOIN [dbo].[User] u on u.id = p.user_id and u.status = 1
+                                            JOIN [dbo].[Genre] g on g.id = p.genre_id
+                                            WHERE p.Id = {id} AND p.status = 1";
 
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
                     {
@@ -121,10 +123,11 @@ namespace Elencar.Infra.Repositories
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                throw;
+                Console.WriteLine(e.Message);
+                return default;
             }
         }
 
@@ -134,22 +137,18 @@ namespace Elencar.Infra.Repositories
             {
                 using (var con = new SqlConnection(_configuration["ConnectionString"]))
                 {
-                    var sqlCmd = @"INSERT INTO Profile (
+                    var sqlCmd = @"INSERT INTO [dbo].[Profile] (
                                                 Bio,
                                                 Fee,
                                                 User_Id,
                                                 Genre_Id,
-                                                Status,
-                                                CreatedAt,
-                                                UpdatedAt)
+                                                Status)
                                            VALUES (
                                                 @bio,
                                                 @fee,
                                                 @userId,
                                                 @genreId,
-                                                1,
-                                                GetDate(),
-                                                GetDate(),
+                                                1
                                                 );SELECT scope_Identity();";
 
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
@@ -163,14 +162,21 @@ namespace Elencar.Infra.Repositories
 
                         con.Open();
                         var id = cmd.ExecuteScalar().ToString();
-                        return await GetByIdAsync(Int32.Parse(id));
+
+                        var genre = await _genreRepository.GetByIdAsync(profile.Genre.Id);
+
+                        profile.Id = Int32.Parse(id);
+                        profile.Genre = genre;
+
+                        //return await GetByIdAsync(Int32.Parse(id));
+                        return profile;
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                throw;
+                Console.WriteLine(e.Message);
+                return default;
             }
         }
 

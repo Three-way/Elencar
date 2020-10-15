@@ -12,7 +12,6 @@ namespace Elencar.Domain.Entities
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public int GenreId { get; set; }
-
         public virtual Genre  Genre { get; set; }
         public int ActorId { get; set; }
         public virtual Actor Actor { get; set; }

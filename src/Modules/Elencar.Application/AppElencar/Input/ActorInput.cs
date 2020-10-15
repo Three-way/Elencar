@@ -9,6 +9,9 @@ namespace Elencar.Application.AppElencar.Input
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public bool isProducer { get; set; }
+        //public bool isProducer { get; set; }
+        public string Bio { get; set; }
+        public decimal Fee { get; set; }
+        public int GenreId { get; set; }
     }
 }

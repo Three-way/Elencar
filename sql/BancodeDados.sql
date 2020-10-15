@@ -84,3 +84,9 @@ ADD CONSTRAINT PK_User_Id PRIMARY KEY CLUSTERED (Id);
     CONSTRAINT FK_UserReservation_Profile FOREIGN KEY (Profile_Id) REFERENCES [dbo].[Profile] (Id)
 )
 */
+
+-- ALTER TABLE [dbo].[User] 
+-- ALTER COLUMN is BIT NOT NULL
+
+-- ALTER TABLE [dbo].[Profile] 
+-- ALTER COLUMN Status BIT NOT NULL

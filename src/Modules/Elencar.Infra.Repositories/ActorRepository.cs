@@ -173,6 +173,12 @@ namespace Elencar.Infra.Repositories
         {
             try
             {
+                //var hasAccount = await GetByEmailAsync(actor.Email);
+                //if (hasAccount)
+                //{
+                   // return null;
+                //}
+
                 using (var con = new SqlConnection(_configuration["ConnectionString"]))
                 {
 
@@ -283,6 +289,39 @@ namespace Elencar.Infra.Repositories
             {
 
                 throw;
+            }
+        }
+
+        public async Task<bool> HasActor(string email)
+        {
+            try
+            {
+                using (var con = new SqlConnection(_configuration["ConnectionString"]))
+                {
+                    var sqlCmd = $@"SELECT Email FROM [dbo].[User] WHERE Email = '{email}'";
+
+                    using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        con.Open();
+
+                        var reader = await cmd
+                                        .ExecuteReaderAsync()
+                                        .ConfigureAwait(false);
+
+                        if (!reader.Read())
+                        {
+                            return false;
+                        }
+
+                        return true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return default;
             }
         }
     }

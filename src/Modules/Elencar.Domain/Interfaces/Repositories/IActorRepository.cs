@@ -13,6 +13,7 @@ namespace Elencar.Domain.Interfaces.Repositories
         Task<Actor> GetByIdAsync(int id);
         Task<Actor> Insert(Actor actor);
         Task<Actor> Update(Actor actor);
+        Task<bool> HasActor(string email);
         void Delete(int id);
     }
 }

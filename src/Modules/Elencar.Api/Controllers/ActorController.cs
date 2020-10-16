@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Elencar.Application.AppElencar.Input;
 using Elencar.Application.AppElencar.Interfaces;
+using Marraia.Notifications.Base;
+using Marraia.Notifications.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +13,13 @@ namespace Elencar.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ActorController : ControllerBase
+    public class ActorController : BaseController
     {
         private readonly IActorAppService _actorAppService;
 
-        public ActorController(IActorAppService actorAppService)
+        public ActorController(MediatR.INotificationHandler<DomainNotification> notification, 
+            IActorAppService actorAppService)
+            : base(notification)
         {
             _actorAppService = actorAppService;
         }
@@ -23,19 +27,19 @@ namespace Elencar.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ActorInput actorInput)
         {
-            var hasAccount = await _actorAppService.HasActor(actorInput.Email);
-            if (hasAccount)
-            {
-                return Conflict("Actor already enrolled");
-            }
+            //var hasAccount = await _actorAppService.HasActor(actorInput.Email);
+            //if (hasAccount)
+            //{
+            //    return Conflict("Actor already enrolled");
+            //}
             var item = await _actorAppService
                                     .Insert(actorInput)
                                     .ConfigureAwait(false);
-            if (item == null)
-            {
-                return BadRequest("Actor Invalid");
-            }
-            return Created("Actor Created",item);
+            //if (item == null)
+            //{
+            //    return BadRequest("Actor Invalid");
+            //}
+            return CreatedContent("", item);
         }
 
         [HttpGet]

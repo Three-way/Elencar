@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Elencar.Application.AppElencar.Interfaces;
 using Elencar.Infra.IoC;
+using Marraia.Notifications.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -43,7 +44,7 @@ namespace Elencar.Api
                         }
                     });
             });
-
+            services.AddSmartNotification();
             RegisterServices(services);
         }
 

@@ -23,6 +23,11 @@ namespace Elencar.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ActorInput actorInput)
         {
+            var hasAccount = await _actorAppService.HasActor(actorInput.Email);
+            if (hasAccount)
+            {
+                return Conflict("Actor already enrolled");
+            }
             var item = await _actorAppService
                                     .Insert(actorInput)
                                     .ConfigureAwait(false);

@@ -13,6 +13,7 @@ namespace Elencar.Application.AppElencar.Interfaces
         Task<Actor> GetByIdAsync(int id);
         Task<Actor> Insert(ActorInput actorInput);
         Task<Actor> Update(ActorInput actorInput);
+        Task<bool> HasActor(string email);
         void Delete(int id);
     }
 }

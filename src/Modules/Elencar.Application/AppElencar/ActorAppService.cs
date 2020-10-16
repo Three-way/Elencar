@@ -57,6 +57,9 @@ namespace Elencar.Application.AppElencar
             _actorRepository.Delete(id);
         }
 
-        
+        public async Task<bool> HasActor(string email)
+        {
+            return await _actorRepository.HasActor(email);
+        }
     }
 }

@@ -26,8 +26,7 @@ namespace Elencar.Infra.Repositories
                 using (var con = new SqlConnection(_configuration["ConnectionString"]))
                 {
                     var genreList = new List<Genre>();
-                    var sqlCmd = $@"SELECT * FROM Genre g 
-                                            WHERE g.status = 1";
+                    var sqlCmd = $@"SELECT * FROM [dbo].[Genre]";
 
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
                     {
@@ -68,8 +67,8 @@ namespace Elencar.Infra.Repositories
             {
                 using (var con = new SqlConnection(_configuration["ConnectionString"]))
                 {
-                    var sqlCmd = $@"SELECT * FROM Genre g                                           
-                                           WHERE g.status = 1 AND g.Id = {id}";
+                    var sqlCmd = $@"SELECT * FROM [dbo].[Genre]                                           
+                                           WHERE Id = {id}";
 
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
                     {

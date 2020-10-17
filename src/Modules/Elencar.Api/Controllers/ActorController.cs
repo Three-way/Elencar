@@ -25,40 +25,49 @@ namespace Elencar.Api.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(string), 201)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> Post([FromBody] ActorInput actorInput)
         {
-            //var hasAccount = await _actorAppService.HasActor(actorInput.Email);
-            //if (hasAccount)
-            //{
-            //    return Conflict("Actor already enrolled");
-            //}
             var item = await _actorAppService
                                     .Insert(actorInput)
                                     .ConfigureAwait(false);
-            //if (item == null)
-            //{
-            //    return BadRequest("Actor Invalid");
-            //}
             return CreatedContent("", item);
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> Get()
         {
             return Ok(_actorAppService.Get());
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
             return Ok(await _actorAppService.GetByIdAsync(id).ConfigureAwait(false));
         }
 
-        [HttpDelete("{Id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public IActionResult Delete([FromRoute] int id)
         {
-            _actorAppService.Delete(id);
+           _actorAppService.Delete(id);
             return NoContent();
+
         }
     }
 }

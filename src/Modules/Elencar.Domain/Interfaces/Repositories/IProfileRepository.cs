@@ -10,8 +10,10 @@ namespace Elencar.Domain.Interfaces.Repositories
     {
         Task<IEnumerable<Profile>> Get();
         Task<Profile> GetByIdAsync(int id);
+        Task<Profile> GetByActorId(int id);
         Task<Profile> Insert(Profile profile);
         Task<Profile> Update(Profile profile);
         void Delete(int id);
+
     }
 }

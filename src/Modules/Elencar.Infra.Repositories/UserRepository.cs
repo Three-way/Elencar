@@ -17,7 +17,6 @@ namespace Elencar.Infra.Repositories
         public UserRepository(IConfiguration configuration)
         {
             _configuration = configuration;
-            
         }
         public async void Delete(int id)
         {

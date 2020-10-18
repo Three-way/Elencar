@@ -1,18 +1,19 @@
-﻿using Elencar.Domain.Entities;
+﻿using Elencar.Application.AppElencar.Input;
+using Elencar.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elencar.Domain.Interfaces.Repositories
+namespace Elencar.Application.AppElencar.Interfaces
 {
-    public interface IReservationRepository
+    public interface IReservationAppService
     {
         Task<IEnumerable<Reservation>> Get();
         Task<Reservation> GetByIdAsync(int id);
         Task<IEnumerable<Reservation>> GetReservationsByActorIdAsync(int actorId);
-        Task<Reservation> Insert(Reservation reservation);
-        Task<Reservation> Update(Reservation reservation);
+        Task<Reservation> Insert(ReservationInput reservationInput);
+        Task<Reservation> Update(ReservationInput reservationInput);
         void Delete(int id);
     }
 }

@@ -40,13 +40,7 @@ namespace Elencar.Application.AppElencar
 
         public async Task<Actor> Insert(ActorInput actorInput)
         {
-            //var existGenr = await _genreRepository.GetByIdAsync(actorInput.GenreId);
-            //if (existGenr == default)
-            //{
-            //    _notification.NewNotificationBadRequest("Genre not enrolled!");
-            //    return default;
-            //}
-            
+           
             var actor = new Actor(actorInput.Bio,actorInput.Fee,new User(actorInput.userId));
 
 
@@ -73,10 +67,5 @@ namespace Elencar.Application.AppElencar
             _actorRepository.Delete(id);
         }
 
-        public async Task<bool> HasActor(string email)
-        {
-            //return await _actorRepository.HasActor(email);
-            return default;
-        }
     }
 }

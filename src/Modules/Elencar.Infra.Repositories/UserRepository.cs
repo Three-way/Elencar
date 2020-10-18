@@ -13,12 +13,10 @@ namespace Elencar.Infra.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly IConfiguration _configuration;
-        private readonly IUserRepository _userRepository;
 
-        public UserRepository(IConfiguration configuration, IUserRepository userRepository)
+        public UserRepository(IConfiguration configuration)
         {
             _configuration = configuration;
-            _userRepository = userRepository;
         }
         public void Delete(int id)
         {

@@ -19,6 +19,13 @@ namespace Elencar.Domain.Entities
             Password = password;
             Role = roleId;
         }
+        public User(int id, string name, string email, Role roleId)
+        {
+            Id = id;
+            Name = name;
+            Email = email;
+            Role = roleId;
+        }
 
         public int Id { get;  private set; }
         public string Name { get; private set; }

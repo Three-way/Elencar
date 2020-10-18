@@ -13,12 +13,11 @@ namespace Elencar.Infra.Repositories
     public class ActorRepository : IActorRepository
     {
         private readonly IConfiguration _configuration;
-        private readonly IProfileRepository _profileRepository;
 
-        public ActorRepository(IConfiguration configuration, IProfileRepository profileRepository)
+        public ActorRepository(IConfiguration configuration)
         {
             _configuration = configuration;
-            _profileRepository = profileRepository;
+            
         }
 
         public async Task<IEnumerable<Actor>> Get()

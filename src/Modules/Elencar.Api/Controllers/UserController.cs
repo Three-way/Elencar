@@ -35,5 +35,27 @@ namespace Elencar.Api.Controllers
                                     .ConfigureAwait(false);
             return CreatedContent("", item);
         }
+
+        [HttpGet] 
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public IActionResult Get()
+        {
+            return OkOrNoContent(_userAppService.Get());
+        }
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetByIdAsync([FromRoute]int id)
+        {
+            return OkOrNotFound(await _userAppService
+                                        .GetByIdAsync(id)
+                                        .ConfigureAwait(false));
+        }
     }
 }

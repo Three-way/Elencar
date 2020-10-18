@@ -16,6 +16,7 @@ namespace Elencar.Infra.IoC.Repositories
             services.AddScoped<IReservationRepository, ReservationRepository>();
             services.AddScoped<IUserReservationRepository, UserReservationRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
         }
     }
 }

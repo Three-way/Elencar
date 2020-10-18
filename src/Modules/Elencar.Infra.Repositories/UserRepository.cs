@@ -198,9 +198,44 @@ namespace Elencar.Infra.Repositories
             }
         }
 
-        public Task<User> Update(User actor)
+        public async Task<int> Update(User actor)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var con = new SqlConnection(_configuration["ConnectionString"]))
+                {
+                    var sqlCmd = @"UPDATE [dbo].[User] SET
+                                                name = @name,
+                                                email = @email,
+                                                password = @password,
+                                                status = @status,
+                                                roleId = @roleId
+                                              WHERE
+                                                id = @id
+                                                ; SELECT scope_identity();";
+
+                    using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("name", actor.Name);
+                        cmd.Parameters.AddWithValue("email", actor.Email);
+                        cmd.Parameters.AddWithValue("password", actor.Password);
+                        cmd.Parameters.AddWithValue("status", actor.Status);
+                        cmd.Parameters.AddWithValue("roleId", actor.Role.Id);
+                        con.Open();
+
+                        var id = await cmd.ExecuteScalarAsync().ConfigureAwait(false);
+
+                        return int.Parse(id.ToString());
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

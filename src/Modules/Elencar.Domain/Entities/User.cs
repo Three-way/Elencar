@@ -31,18 +31,20 @@ namespace Elencar.Domain.Entities
             Role = roleId;
         }
 
-        public User(string name, string email, string password, Role roleId)
+        public User(string name, string email, string password,  Role roleId)
         {
             Name = name;
             Email = email;
             Password = password;
             Role = roleId;
         }
-        public User(int id, string name, string email, Role roleId)
+
+        public User(string name, string email, string password, bool status, Role roleId)
         {
-            Id = id;
             Name = name;
             Email = email;
+            Password = password;
+            Status = status;
             Role = roleId;
         }
 

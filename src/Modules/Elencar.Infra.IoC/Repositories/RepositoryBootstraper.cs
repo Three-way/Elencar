@@ -12,8 +12,9 @@ namespace Elencar.Infra.IoC.Repositories
         internal void ChildServiceRegister(IServiceCollection services)
         {
             services.AddScoped<IActorRepository, ActorRepository>();
-            services.AddScoped<IProfileRepository, ProfileReopository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
         }
     }
 }

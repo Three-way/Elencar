@@ -17,15 +17,13 @@ namespace Elencar.Application.AppElencar
         private readonly IActorRepository _actorRepository;
         private readonly ISmartNotification _notification;
         private readonly IGenreRepository _genreRepository;
-        private readonly IProfileRepository _profileRepository;
 
 
-        public ActorAppService(ISmartNotification notification, IActorRepository actorRepository, IGenreRepository genreRepository, IProfileRepository profileRepository)
+        public ActorAppService(ISmartNotification notification, IActorRepository actorRepository, IGenreRepository genreRepository)
         {
             _notification = notification;
             _actorRepository = actorRepository;
             _genreRepository = genreRepository;
-            _profileRepository = profileRepository;
         }
 
         public async Task<IEnumerable<Actor>> Get()

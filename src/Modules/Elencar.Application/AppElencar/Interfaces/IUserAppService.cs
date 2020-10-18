@@ -1,4 +1,5 @@
 ﻿using Elencar.Application.AppElencar.Input;
+using Elencar.Application.AppElencar.Output;
 using Elencar.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace Elencar.Application.AppElencar.Interfaces
 {
     public interface IUserAppService
     {
-        Task<IEnumerable<User>> Get();
+        IEnumerable<User> Get();
         Task<User> GetByIdAsync(int id);
         Task<User> Insert(UserInput userInput);
         Task<User> Update(UserInput userInput);

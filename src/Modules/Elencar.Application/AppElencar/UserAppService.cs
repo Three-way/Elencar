@@ -25,7 +25,7 @@ namespace Elencar.Application.AppElencar
         }
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _userRepository.Delete(id);
         }
 
         public IEnumerable<User> Get()
@@ -45,20 +45,33 @@ namespace Elencar.Application.AppElencar
             {
                 _notification.NewNotificationBadRequest("Insira um e-mail válido!");
                 return default;
-            }
+            };
             if (!user.IsValid())
             {
                 _notification.NewNotificationBadRequest("Dados do usuário são obrigatórios");
                 return default;
-            }
+            };
             var id =  await _userRepository.Insert(user);
             return await _userRepository.GetByIdAsync(id);
 
         }
 
-        public Task<User> Update(UserInput profileInput)
+        public async Task<User> Update(UserInput userInput)
         {
-            throw new NotImplementedException();
+            var user = new User(userInput.Name, userInput.Email, userInput.Password, userInput.Status, new Role(userInput.Role));
+            if (!user.IsValidEmail(userInput.Email))
+            {
+                _notification.NewNotificationBadRequest("Insira um e-mail válido!");
+                return default;
+            };
+            if (!user.IsValid())
+            {
+                _notification.NewNotificationBadRequest("Insira dados válidos!");
+                return default;
+            };
+            var id = await _userRepository.Update(user);
+
+            return await _userRepository.GetByIdAsync(id);
         }
     }
 }

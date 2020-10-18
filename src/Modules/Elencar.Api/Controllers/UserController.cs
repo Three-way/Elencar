@@ -57,5 +57,28 @@ namespace Elencar.Api.Controllers
                                         .GetByIdAsync(id)
                                         .ConfigureAwait(false));
         }
+
+        [HttpPut]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> Update([FromBody] UserInput userInput)
+        {
+            return OkOrNotFound(await _userAppService.Update(userInput));
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            _userAppService.Delete(id);
+            return NoContent();
+
+        }
     }
 }

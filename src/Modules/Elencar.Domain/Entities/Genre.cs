@@ -4,6 +4,10 @@ namespace Elencar.Domain.Entities
 {
     public class Genre
     {
+        public Genre()
+        {
+        }
+
         public Genre(string description)
         {
             Description = description;

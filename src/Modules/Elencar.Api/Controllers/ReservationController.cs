@@ -56,16 +56,7 @@ namespace Elencar.Api.Controllers
             return Ok(await _reservationAppService.GetByIdAsync(id).ConfigureAwait(false));
         }
 
-        [HttpGet]
-        [Route("{id}")]
-        [ProducesResponseType(typeof(string), 200)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
-        [ProducesResponseType(500)]
-        public async Task<IActionResult> GetActorReservations([FromRoute] int id)
-        {
-            return Ok(await _reservationAppService.GetByIdAsync(id).ConfigureAwait(false));
-        }
+        
 
 
         [HttpDelete]

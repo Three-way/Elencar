@@ -9,29 +9,29 @@ using System.Threading.Tasks;
 
 namespace Elencar.Application.AppElencar
 {
-    class UserAppService : ControllerBase, IProfileAppService
+    public class UserAppService : ControllerBase, IUserAppService
     {
         public void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Profile>> Get()
+        public Task<IEnumerable<User>> Get()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Profile> GetByIdAsync(int id)
+        public Task<User> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Profile> Insert(ProfileInput profileInput)
+        public Task<User> Insert(UserInput userInput)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Profile> Update(ProfileInput profileInput)
+        public Task<User> Update(UserInput userInput)
         {
             throw new NotImplementedException();
         }

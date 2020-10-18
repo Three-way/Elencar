@@ -67,13 +67,14 @@ namespace Elencar.Infra.Repositories
                     var sqlCmd = @"SELECT r.*, g.id as genreId, u.id as userId, a.id as actorId
                                                 FROM Reservation r
                                                 JOIN Genre g on g.id = r.genreId
-                                                JOIN UserReservation ur on ur.reservatioId = r.Id
+                                                JOIN UserReservation ur on ur.reservationId = r.Id
                                                 JOIN [dbo].[User] u on u.id = ur.producerId
                                                 JOIN Actor a on a.id = ur.actorId
                                                 ";
 
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
                     {
+                        con.Open();
                         var reader = await cmd
                                         .ExecuteReaderAsync()
                                         .ConfigureAwait(false);
@@ -108,44 +109,7 @@ namespace Elencar.Infra.Repositories
             }
         }
 
-        public async Task<IEnumerable<Reservation>> GetReservationsByActorIdAsync(int actorId)
-        {
-            try
-            {
-                using (var con = new SqlConnection(_configuration["ConnectionString"]))
-                {
-                    var reservationList = new List<Reservation>();
-                    var sqlCmd = $@"SELECT r.*
-                                                FROM Reservation r
-                                                JOIN Genre g on g.id = r.genreId
-                                                JOIN UserReservation ur on ur.reservatioId = r.Id
-                                                JOIN Actor a on a.id = ur.actorId and a.status = 1
-                                 WHERE a.Id = {actorId} ";
-
-                    using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
-                    {
-                        var reader = await cmd
-                                        .ExecuteReaderAsync()
-                                        .ConfigureAwait(false);
-
-                        while (reader.Read())
-                        {
-                            var reservationId = Int32.Parse(reader["Id"].ToString());
-                            var reservation = await GetByIdAsync(reservationId);
-
-                            reservationList.Add(reservation);
-                        }
-
-                        return reservationList;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+        
 
         public async Task<Reservation> GetByIdAsync(int id)
         {
@@ -156,7 +120,7 @@ namespace Elencar.Infra.Repositories
                     var sqlCmd = $@"SELECT r.*, g.id as genreId, u.id as userId, a.id as actorId
                                                 FROM Reservation r
                                                 JOIN Genre g on g.id = r.genreId
-                                                JOIN UserReservation ur on ur.reservatioId = r.Id
+                                                JOIN UserReservation ur on ur.reservationId = r.Id
                                                 JOIN [dbo].[User] u on u.id = ur.producerId
                                                 JOIN Actor a on a.id = ur.actorId
                                  WHERE r.Id = {id}
@@ -164,6 +128,7 @@ namespace Elencar.Infra.Repositories
 
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
                     {
+                        con.Open();
                         var reader = await cmd
                                         .ExecuteReaderAsync()
                                         .ConfigureAwait(false);

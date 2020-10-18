@@ -13,6 +13,9 @@ namespace Elencar.Infra.IoC.Application
         {
             services.AddScoped<IActorAppService, ActorAppService>();
             services.AddScoped<IProfileAppService, ProfileAppService>();
+            services.AddScoped<IReservationAppService, ReservationAppService>();
+            services.AddScoped<IUserReservationAppService, UserReservationAppService>();
+            services.AddScoped<IUserAppService, UserAppService>();
         }
     }
 }

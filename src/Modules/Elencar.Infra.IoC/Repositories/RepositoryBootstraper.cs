@@ -14,6 +14,9 @@ namespace Elencar.Infra.IoC.Repositories
             services.AddScoped<IActorRepository, ActorRepository>();
             services.AddScoped<IProfileRepository, ProfileReopository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
+            services.AddScoped<IReservationRepository, ReservationRepository>();
+            services.AddScoped<IUserReservationRepository, UserReservationRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Elencar.Application.AppElencar
             throw new NotImplementedException();
         }
 
-        public IEnumerable<User> Get()
+        public Task<IEnumerable<User>> Get()
         {
             return _userRepository.Get();
         }
@@ -38,7 +38,7 @@ namespace Elencar.Application.AppElencar
             return _userRepository.GetByIdAsync(id);
         }
 
-        public async Task<User> Insert(UserInput userInput)
+        public Task<User> Insert(UserInput userInput)
         {
             var user = new User(userInput.Name, userInput.Email, userInput.Password , new Role(userInput.Role));
             if (!user.IsValidEmail(userInput.Email))
@@ -56,7 +56,7 @@ namespace Elencar.Application.AppElencar
 
         }
 
-        public Task<User> Update(UserInput profileInput)
+        public Task<User> Update(UserInput userInput)
         {
             throw new NotImplementedException();
         }

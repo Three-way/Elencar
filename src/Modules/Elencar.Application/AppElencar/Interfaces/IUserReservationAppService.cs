@@ -4,13 +4,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elencar.Domain.Interfaces.Repositories
+namespace Elencar.Application.AppElencar.Interfaces
 {
-    public interface IUserReservationRepository
+    public interface IUserReservationAppService
     {
         Task<IEnumerable<Reservation>> GetReservationsByUserIdAsync(int userId);
-        void Insert(UserReservation reservation);
-        void Update(UserReservation reservation);
-        void Delete(int id);
     }
 }

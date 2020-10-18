@@ -43,7 +43,7 @@ namespace Elencar.Api.Controllers
         [ProducesResponseType(500)]
         public async Task<IActionResult> Get()
         {
-            return Ok(_actorAppService.Get());
+            return Ok(await _actorAppService.Get());
         }
 
         [HttpGet]

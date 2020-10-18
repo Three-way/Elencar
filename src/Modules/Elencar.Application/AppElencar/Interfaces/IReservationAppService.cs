@@ -11,7 +11,6 @@ namespace Elencar.Application.AppElencar.Interfaces
     {
         Task<IEnumerable<Reservation>> Get();
         Task<Reservation> GetByIdAsync(int id);
-        Task<IEnumerable<Reservation>> GetReservationsByActorIdAsync(int actorId);
         Task<Reservation> Insert(ReservationInput reservationInput);
         Task<Reservation> Update(ReservationInput reservationInput);
         void Delete(int id);

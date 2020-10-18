@@ -28,7 +28,7 @@ namespace Elencar.Application.AppElencar
             _userRepository.Delete(id);
         }
 
-        public Task<IEnumerable<User>> Get()
+        public IEnumerable<User> Get()
         {
             return _userRepository.Get();
         }
@@ -38,7 +38,7 @@ namespace Elencar.Application.AppElencar
             return _userRepository.GetByIdAsync(id);
         }
 
-        public Task<User> Insert(UserInput userInput)
+        public async Task<User> Insert(UserInput userInput)
         {
             var user = new User(userInput.Name, userInput.Email, userInput.Password , new Role(userInput.Role));
             if (!user.IsValidEmail(userInput.Email))

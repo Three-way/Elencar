@@ -18,22 +18,104 @@ namespace Elencar.Infra.Repositories
         {
             _configuration = configuration;
         }
-        public void Delete(int id)
+        public async void Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var con = new SqlConnection(_configuration["ConnectionString"]))
+                {
+                    var sqlCmd = $@"DELETE FROM Role WHERE ID = {id}";
+
+                    using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        con.Open();
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public Task<IEnumerable<Role>> Get()
+        public async Task<IEnumerable<Role>> Get()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var con = new SqlConnection(_configuration["ConnectionString"]))
+                {
+                    var roleList = new List<Role>();
+                    var sqlCmd = $@"SELECT * FROM [dbo].[Role]";
+
+                    using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        con.Open();
+
+                        var reader = await cmd
+                                        .ExecuteReaderAsync()
+                                        .ConfigureAwait(false);
+
+                        while (reader.Read())
+                        {
+
+                            var role = new Role(Int32.Parse(reader["id"].ToString()), reader["name"].ToString(), (DateTime)reader["createdAt"]);
+
+
+
+                            roleList.Add(role);
+                        }
+                        return roleList;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public Task<Role> GetByIdAsync(int id)
+        public async Task<Role> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var con = new SqlConnection(_configuration["ConnectionString"]))
+                {
+                    var sqlCmd = $@"SELECT * FROM [dbo].[Role]                                           
+                                           WHERE Id = {id}";
+
+                    using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        con.Open();
+
+                        var reader = await cmd
+                                        .ExecuteReaderAsync()
+                                        .ConfigureAwait(false);
+
+                        while (reader.Read())
+                        {
+
+                            var role = new Role(id, reader["name"].ToString());
+
+                            return role;
+                        }
+                        return default;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public int Insert(Role role)
+        public async Task<Role> Insert(Role role)
         {
             try
             {
@@ -47,9 +129,9 @@ namespace Elencar.Infra.Repositories
                         cmd.CommandType = CommandType.Text;
                         cmd.Parameters.AddWithValue("name", role.Name);
                         con.Open();
-                        var id = cmd.ExecuteScalar();
+                        var id = await cmd.ExecuteScalarAsync().ConfigureAwait(false);
 
-                        return int.Parse(id.ToString());
+                        return await GetByIdAsync(role.Id);
                     }
                 }
             }
@@ -59,9 +141,32 @@ namespace Elencar.Infra.Repositories
             }
         }
 
-        public Task<Role> Update(Role role)
+        public async Task<Role> Update(Role role)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var con = new SqlConnection(_configuration["ConnectionString"]))
+                {
+                    var sqlCmd = $@"UPDATE Role set
+                                                Name = @dname
+                                    WHERE id = {role.Id}";
+
+                    using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
+                    {
+                        cmd.CommandType = CommandType.Text;
+
+                        cmd.Parameters.AddWithValue("name", role.Name);
+
+                        con.Open();
+                        return await GetByIdAsync(role.Id);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

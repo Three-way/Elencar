@@ -6,9 +6,10 @@ namespace Elencar.Domain.Interfaces.Repositories
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<User>> Get();
+        IEnumerable<User> Get();
         Task<User> GetByIdAsync(int id);
-        int Insert(User actor);
+        Task<int> Insert(User actor);
+        Task<User> GetByEmailAsync(string email);
         Task<User> Update(User actor);
         void Delete(int id);
     }

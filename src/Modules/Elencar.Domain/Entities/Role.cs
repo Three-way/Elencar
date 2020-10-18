@@ -6,6 +6,12 @@ namespace Elencar.Domain.Entities
     {
         public Role(){}
 
+        public Role(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
         public Role(int id)
         {
             Id = id;

@@ -78,12 +78,7 @@ namespace Elencar.Infra.Repositories
                         while (reader.Read())
                         {
 
-                            var genre = new Genre()
-                            {
-                                Id = id,
-                                Description = reader["description"].ToString(),
-                                
-                            };
+                            var genre = new Genre(id, reader["description"].ToString());
 
                             return genre;
                         }

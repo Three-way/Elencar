@@ -10,7 +10,6 @@ namespace Elencar.Domain.Interfaces.Repositories
     {
         Task<IEnumerable<Reservation>> Get();
         Task<Reservation> GetByIdAsync(int id);
-        Task<IEnumerable<Reservation>> GetReservationsByActorIdAsync(int actorId);
         Task<Reservation> Insert(Reservation reservation);
         Task<Reservation> Update(Reservation reservation);
         void Delete(int id);

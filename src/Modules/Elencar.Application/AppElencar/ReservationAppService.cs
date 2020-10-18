@@ -101,16 +101,6 @@ namespace Elencar.Application.AppElencar
             _reservationRepository.Delete(id);
         }
 
-        public async Task<IEnumerable<Reservation>> GetReservationsByActorIdAsync(int actorId)
-        {
-            var actorReservations = await _reservationRepository.GetReservationsByActorIdAsync(actorId);
-
-            if (actorReservations == default)
-            {
-                _notification.NewNotificationBadRequest("No result.");
-                return default;
-            }
-            return actorReservations;
-        }
+       
     }
 }

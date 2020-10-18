@@ -10,10 +10,10 @@ namespace Elencar.Application.AppElencar.Interfaces
     public interface IActorAppService
     {
         Task<IEnumerable<Actor>> Get();
+        Task<Actor> EnrolledActor(int id);
         Task<Actor> GetByIdAsync(int id);
         Task<Actor> Insert(ActorInput actorInput);
         Task<Actor> Update(ActorInput actorInput);
-        Task<bool> HasActor(string email);
         void Delete(int id);
     }
 }

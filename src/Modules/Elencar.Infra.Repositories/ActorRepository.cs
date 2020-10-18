@@ -27,8 +27,9 @@ namespace Elencar.Infra.Repositories
                 var actorList = new List<Actor>();
                 using (var con = new SqlConnection(_configuration["ConnectionString"]))
                 {
-                    var sqlCmd = @$"SELECT * FROM [dbo].[Actor] 
-                                                    WHERE userId ='{id}'";
+                    var sqlCmd = @$"SELECT u.name, u.email, u.roleId, r.name as papel, a.fee, a.bio, a.userId FROM [dbo].[Actor] a
+                                            INNER JOIN [dbo].[User] u on u.id = a.userId
+                                            INNER JOIN [dbo].[Role] r on r.id = u.roleId";
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
                     {
                         cmd.CommandType = CommandType.Text;
@@ -63,8 +64,8 @@ namespace Elencar.Infra.Repositories
                 using (var con = new SqlConnection(_configuration["ConnectionString"]))
                 {
                     var sqlCmd = @$"SELECT u.name, u.email, u.roleId, r.name as papel, a.fee, a.bio, a.userId FROM [dbo].[Actor] a
-                                            INNER JOIN [dbo].[User] u on
-                                            INNER JOIN [dbo].[Role] r on
+                                            INNER JOIN [dbo].[User] u on u.id = a.userId
+                                            INNER JOIN [dbo].[Role] r on r.id = u.roleId
                                                     WHERE a.userId ='{id}'";
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
                     {
@@ -101,8 +102,8 @@ namespace Elencar.Infra.Repositories
                 using (var con = new SqlConnection(_configuration["ConnectionString"]))
                 {
                     var sqlCmd = @$"SELECT u.name, u.email, u.roleId, r.name as papel, a.fee, a.bio, a.userId FROM [dbo].[Actor] a
-                                            INNER JOIN [dbo].[User] u on
-                                            INNER JOIN [dbo].[Role] r on
+                                            INNER JOIN [dbo].[User] u on u.id = a.userId
+                                            INNER JOIN [dbo].[Role] r on r.id = u.roleId
                                                     WHERE u.id ='{id}'";
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
                     {

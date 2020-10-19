@@ -10,7 +10,7 @@ namespace Elencar.Domain.Interfaces.Repositories
     {
         Task<IEnumerable<Role>> Get();
         Task<Role> GetByIdAsync(int id);
-        int Insert(Role role);
+        Task<Role> Insert(Role role);
         Task<Role> Update(Role role);
         void Delete(int id);
     }

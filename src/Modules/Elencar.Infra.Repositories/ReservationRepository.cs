@@ -81,7 +81,7 @@ namespace Elencar.Infra.Repositories
 
                         while (reader.Read())
                         {
-                            var genre = await _genreRepository.GetByIdAsync(Int32.Parse(reader["genderId"].ToString()));
+                            var genre = await _genreRepository.GetByIdAsync(Int32.Parse(reader["genreId"].ToString()));
                             var producer = await _userRepository.GetByIdAsync(Int32.Parse(reader["userId"].ToString()));
                             var actor = await _actorRepository.GetByIdAsync(Int32.Parse(reader["actorId"].ToString()));
 
@@ -135,7 +135,7 @@ namespace Elencar.Infra.Repositories
 
                         while (reader.Read())
                         {
-                            var genre = await _genreRepository.GetByIdAsync(Int32.Parse(reader["genderId"].ToString()));
+                            var genre = await _genreRepository.GetByIdAsync(Int32.Parse(reader["genreId"].ToString()));
                             var producer = await _userRepository.GetByIdAsync(Int32.Parse(reader["userId"].ToString()));
                             var actor = await _actorRepository.GetByIdAsync(Int32.Parse(reader["actorId"].ToString()));
 
@@ -191,10 +191,10 @@ namespace Elencar.Infra.Repositories
 
                         var id = await cmd.ExecuteScalarAsync().ConfigureAwait(false);
 
-                        var userReservation = new UserReservation((int)id, reservation.Producer.Id, reservation.Actor.Id);
+                        var userReservation = new UserReservation(Int32.Parse(id.ToString()), reservation.Producer.Id, reservation.Actor.Id);
                         _userReservationRepository.Insert(userReservation);
 
-                        return await GetByIdAsync((int)id);
+                        return await GetByIdAsync(Int32.Parse(id.ToString()));
 
                     }
                 }
@@ -235,12 +235,12 @@ namespace Elencar.Infra.Repositories
                         cmd.Parameters.AddWithValue("reservationId", reservation.Id);
                         con.Open();
 
-                        var id = await cmd.ExecuteScalarAsync().ConfigureAwait(false);
+                        await cmd.ExecuteScalarAsync().ConfigureAwait(false);
 
-                        var userReservation = new UserReservation((int)id, reservation.Producer.Id, reservation.Actor.Id);
+                        var userReservation = new UserReservation(reservation.Id, reservation.Producer.Id, reservation.Actor.Id);
                         _userReservationRepository.Update(userReservation);
 
-                        return await GetByIdAsync((int)id);
+                        return await GetByIdAsync(reservation.Id);
 
                     }
                 }

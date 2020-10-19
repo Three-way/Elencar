@@ -67,5 +67,9 @@ namespace Elencar.Application.AppElencar
             _actorRepository.Delete(id);
         }
 
+        public Task<Actor> EnrolledActor(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Elencar.Application.AppElencar.Input;
+using Elencar.Application.AppElencar.Input.ObjectValue;
 using Elencar.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Elencar.Application.AppElencar.Interfaces
         Task<IEnumerable<Reservation>> Get();
         Task<Reservation> GetByIdAsync(int id);
         Task<Reservation> Insert(ReservationInput reservationInput);
-        Task<Reservation> Update(ReservationInput reservationInput);
+        Task<Reservation> Update(ReservationInputUpdate reservationInputUpdate);
         void Delete(int id);
     }
 }

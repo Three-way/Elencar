@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Elencar.Application.AppElencar.Input;
+using Elencar.Application.AppElencar.Input.ObjectValue;
 using Elencar.Application.AppElencar.Interfaces;
 using Marraia.Notifications.Base;
 using Marraia.Notifications.Models;
@@ -55,7 +56,17 @@ namespace Elencar.Api.Controllers
         {
             return Ok(await _reservationAppService.GetByIdAsync(id));
         }
-    
+
+        [HttpPut]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> Update([FromBody] ReservationInputUpdate reservationInputUpdate)
+        {
+            return Ok(await _reservationAppService.Update(reservationInputUpdate));
+        }
+
 
 
         [HttpDelete]

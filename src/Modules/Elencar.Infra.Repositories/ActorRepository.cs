@@ -104,7 +104,7 @@ namespace Elencar.Infra.Repositories
                     var sqlCmd = @$"SELECT u.name, u.email, u.roleId, r.name as papel, a.fee, a.bio, a.userId FROM [dbo].[Actor] a
                                             INNER JOIN [dbo].[User] u on u.id = a.userId
                                             INNER JOIN [dbo].[Role] r on r.id = u.roleId
-                                                    WHERE u.id ='{id}'";
+                                                    WHERE a.id ='{id}'";
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
                     {
                         cmd.CommandType = CommandType.Text;
@@ -114,7 +114,7 @@ namespace Elencar.Infra.Repositories
                                             .ConfigureAwait(false);
                         while (reader.Read())
                         {
-                            var actor = new Actor(reader["id"].ToString(), (decimal)(reader["fee"]),
+                            var actor = new Actor(id,reader["bio"].ToString(), (decimal)(reader["fee"]),
                                                 new User(int.Parse(reader["userId"].ToString()), reader["name"].ToString(), reader["email"].ToString(),
                                                 new Role(int.Parse(reader["roleId"].ToString()),reader["papel"].ToString()))
                                                 );

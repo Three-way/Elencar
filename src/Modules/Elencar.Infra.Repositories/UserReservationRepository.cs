@@ -53,7 +53,7 @@ namespace Elencar.Infra.Repositories
                         while (reader.Read())
                         {
                             
-                            var genre = await _genreRepository.GetByIdAsync(Int32.Parse(reader["genderId"].ToString()));
+                            var genre = await _genreRepository.GetByIdAsync(Int32.Parse(reader["genreId"].ToString()));
                             var producer = await _userRepository.GetByIdAsync(Int32.Parse(reader["userId"].ToString()));
                             var actor = await _actorRepository.GetByIdAsync(Int32.Parse(reader["actorId"].ToString()));
 

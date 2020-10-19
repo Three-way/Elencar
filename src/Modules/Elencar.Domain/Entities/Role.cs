@@ -12,6 +12,13 @@ namespace Elencar.Domain.Entities
             Name = name;
         }
 
+        public Role(int id, string name, DateTime createdAt)
+        {
+            Id = id;
+            Name = name;
+            CreatedAt = createdAt;
+        }
+
         public Role(int id)
         {
             Id = id;

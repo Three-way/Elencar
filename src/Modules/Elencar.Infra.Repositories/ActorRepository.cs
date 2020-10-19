@@ -105,7 +105,8 @@ namespace Elencar.Infra.Repositories
                                             .ConfigureAwait(false);
                         while (reader.Read())
                         {
-                            var actor = new Actor(id, reader["bio"].ToString(),(decimal)(reader["fee"]),
+
+                            var actor = new Actor(id,reader["bio"].ToString(), (decimal)(reader["fee"]),
                                                 new User(int.Parse(reader["userId"].ToString()), reader["name"].ToString(), reader["email"].ToString(),
                                                 new Role(int.Parse(reader["roleId"].ToString()),reader["papel"].ToString()))
                                                 );

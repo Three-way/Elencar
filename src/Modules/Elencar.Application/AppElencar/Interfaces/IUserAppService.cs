@@ -1,4 +1,5 @@
 ﻿using Elencar.Application.AppElencar.Input;
+using Elencar.Application.AppElencar.Input.ObjectValues;
 using Elencar.Application.AppElencar.Output;
 using Elencar.Domain.Entities;
 using System;
@@ -13,7 +14,7 @@ namespace Elencar.Application.AppElencar.Interfaces
         IEnumerable<User> Get();
         Task<User> GetByIdAsync(int id);
         Task<User> Insert(UserInput userInput);
-        Task<User> Update(UserInput userInput);
+        Task<User> Update(UserInputUpdate userInput);
         void Delete(int id);
     }
 }

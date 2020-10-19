@@ -21,6 +21,15 @@ namespace Elencar.Domain.Entities
             Status = status;
             Role = roleId;
         }
+        public User(int id, string name, string email,string password ,bool status, Role roleId)
+        {
+            Id = id;
+            Name = name;
+            Email = email;
+            Password = password;
+            Status = status;
+            Role = roleId;
+        }
 
 
         public User(int id, string name, string email, Role roleId)

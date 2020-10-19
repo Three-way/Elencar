@@ -7,10 +7,10 @@ namespace Elencar.Domain.Interfaces.Repositories
     public interface IActorRepository
     {
         Task<IEnumerable<Actor>> Get();
-        Task<Actor> EnrolledActor(int id);
+        bool EnrolledActor(int id);
         Task<Actor> GetByIdAsync(int id);
-        Task<Actor> Insert(Actor actor);
-        Task<Actor> Update(Actor actor);
+        Task<int> Insert(Actor actor);
+        Task<int> Update(Actor actor);
         void Delete(int id);
     }
 }

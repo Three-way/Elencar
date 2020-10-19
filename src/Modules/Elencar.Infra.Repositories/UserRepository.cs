@@ -175,7 +175,7 @@ namespace Elencar.Infra.Repositories
                                                 @name,
                                                 @email,
                                                 @password,
-                                                1
+                                                @roleId
                                             ); SELECT scope_identity();";
 
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))

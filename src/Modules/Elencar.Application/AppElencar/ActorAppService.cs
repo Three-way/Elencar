@@ -1,4 +1,5 @@
 ﻿using Elencar.Application.AppElencar.Input;
+using Elencar.Application.AppElencar.Input.ObjectValues;
 using Elencar.Application.AppElencar.Interfaces;
 using Elencar.Domain.Entities;
 using Elencar.Domain.Interfaces.Repositories;
@@ -16,14 +17,12 @@ namespace Elencar.Application.AppElencar
     {
         private readonly IActorRepository _actorRepository;
         private readonly ISmartNotification _notification;
-        private readonly IGenreRepository _genreRepository;
 
 
-        public ActorAppService(ISmartNotification notification, IActorRepository actorRepository, IGenreRepository genreRepository)
+        public ActorAppService(ISmartNotification notification, IActorRepository actorRepository)
         {
             _notification = notification;
             _actorRepository = actorRepository;
-            _genreRepository = genreRepository;
         }
 
         public async Task<IEnumerable<Actor>> Get()
@@ -34,16 +33,13 @@ namespace Elencar.Application.AppElencar
         public async Task<Actor> GetByIdAsync(int id)
         {
             return await _actorRepository
-                            .GetByIdAsync(id)
-                            .ConfigureAwait(false);
+                            .GetByIdAsync(id);
         }
 
         public async Task<Actor> Insert(ActorInput actorInput)
         {
            
             var actor = new Actor(actorInput.Bio,actorInput.Fee,new User(actorInput.userId));
-
-
          
             if (actor == default)
             {
@@ -51,15 +47,23 @@ namespace Elencar.Application.AppElencar
                 return default;
             }
 
+            var id = await _actorRepository.Insert(actor);
 
-            return await _actorRepository.Insert(actor);
+            if (id == default)
+            {
+                _notification.NewNotificationBadRequest("Usuário já é ator");
+                return default;
+            }
 
+            return await _actorRepository.GetByIdAsync(id);
         }
-        public async Task<Actor> Update(ActorInput actorInput)
+        public async Task<Actor> Update(ActorInputUpdate actorInput)
         {
-            var actor = new Actor(actorInput.Bio, actorInput.Fee, new User(actorInput.userId));
+            var actor = new Actor(actorInput.Id, actorInput.Bio, actorInput.Fee);
 
-            return await _actorRepository.Insert(actor);
+            var id =  await _actorRepository.Update(actor);
+
+            return await _actorRepository.GetByIdAsync(id);
         }
 
         public void Delete(int id)

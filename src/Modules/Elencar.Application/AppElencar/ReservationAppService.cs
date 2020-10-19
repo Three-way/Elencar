@@ -1,10 +1,12 @@
 ﻿using Elencar.Application.AppElencar.Input;
+using Elencar.Application.AppElencar.Input.ObjectValue;
 using Elencar.Application.AppElencar.Interfaces;
 using Elencar.Domain.Entities;
 using Elencar.Domain.Interfaces.Repositories;
 using Marraia.Notifications.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -62,8 +64,8 @@ namespace Elencar.Application.AppElencar
             var genre = await _genreRepository.GetByIdAsync(reservationInput.GenreId);
             var producer = await _userRepository.GetByIdAsync(reservationInput.ProducerId);
             var actor = await _actorRepository.GetByIdAsync(reservationInput.ActorId);
-            var reservation = new Reservation(reservationInput.Name, reservationInput.Start, reservationInput.End
-                                                ,genre,producer,actor);
+            var reservation = new Reservation(reservationInput.Name, DateTime.Parse(reservationInput.Start, new CultureInfo("pt-BR")), DateTime.Parse(reservationInput.End, new CultureInfo("pt-BR"))
+                                                , genre,producer,actor);
 
 
             var newReservation = await _reservationRepository.Insert(reservation);
@@ -78,12 +80,12 @@ namespace Elencar.Application.AppElencar
             return newReservation;
 
         }
-        public async Task<Reservation> Update(ReservationInput reservationInput)
+        public async Task<Reservation> Update(ReservationInputUpdate reservationInputUpdate)
         {
-            var genre = await _genreRepository.GetByIdAsync(reservationInput.GenreId);
-            var producer = await _userRepository.GetByIdAsync(reservationInput.ProducerId);
-            var actor = await _actorRepository.GetByIdAsync(reservationInput.ActorId);
-            var reservation = new Reservation(reservationInput.Name, reservationInput.Start, reservationInput.End
+            var genre = await _genreRepository.GetByIdAsync(reservationInputUpdate.GenreId);
+            var producer = await _userRepository.GetByIdAsync(reservationInputUpdate.ProducerId);
+            var actor = await _actorRepository.GetByIdAsync(reservationInputUpdate.ActorId);
+            var reservation = new Reservation(reservationInputUpdate.ReservationId, reservationInputUpdate.Name, DateTime.Parse(reservationInputUpdate.Start, new CultureInfo("pt-BR")), DateTime.Parse(reservationInputUpdate.End, new CultureInfo("pt-BR"))
                                                 , genre, producer, actor);
 
             var newReservation = await _reservationRepository.Update(reservation);

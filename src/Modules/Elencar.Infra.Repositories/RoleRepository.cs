@@ -148,7 +148,7 @@ namespace Elencar.Infra.Repositories
                 using (var con = new SqlConnection(_configuration["ConnectionString"]))
                 {
                     var sqlCmd = $@"UPDATE Role set
-                                                Name = @dname
+                                                Name = @name
                                     WHERE id = {role.Id}";
 
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))

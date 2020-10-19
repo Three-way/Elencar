@@ -40,7 +40,7 @@ namespace Elencar.Infra.Repositories
                         while (reader.Read())
                         {
 
-                            var genre = new Genre(Int32.Parse(reader["userId"].ToString()), reader["description"].ToString());
+                            var genre = new Genre(Int32.Parse(reader["id"].ToString()), reader["name"].ToString());
                             
 
 
@@ -99,23 +99,20 @@ namespace Elencar.Infra.Repositories
             {
                 using (var con = new SqlConnection(_configuration["ConnectionString"]))
                 {
-                    var sqlCmd = @"INSERT INTO Genre (
-                                                Description,
-                                                CreatedAt)
-                                           VALUES (
-                                                @description,
-                                                GetDate(),
-                                                );SELECT scope_Identity();";
+                    var sqlCmd = @"INSERT INTO [dbo].[Genre] (name) VALUES (@name);
+                                    SELECT scope_identity();";
 
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
                     {
                         cmd.CommandType = CommandType.Text;
 
-                        cmd.Parameters.AddWithValue("description", genre.Description);
+                        cmd.Parameters.AddWithValue("name", genre.Name);
 
                         con.Open();
-                        var id = cmd.ExecuteScalar().ToString();
-                        return await GetByIdAsync(Int32.Parse(id));
+
+                        var id = await cmd.ExecuteScalarAsync().ConfigureAwait(false);
+
+                        return await GetByIdAsync(genre.Id);
                     }
                 }
             }
@@ -133,14 +130,14 @@ namespace Elencar.Infra.Repositories
                 using (var con = new SqlConnection(_configuration["ConnectionString"]))
                 {
                     var sqlCmd = $@"UPDATE Genre set
-                                                Description = @description,
+                                                Name = @name
                                     WHERE id = {genre.Id}";
 
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
                     {
                         cmd.CommandType = CommandType.Text;
 
-                        cmd.Parameters.AddWithValue("description", genre.Description);
+                        cmd.Parameters.AddWithValue("name", genre.Name);
 
                         con.Open();
                         return await GetByIdAsync(genre.Id);

@@ -8,20 +8,26 @@ namespace Elencar.Domain.Entities
         {
         }
 
-        public Genre(string description)
+        public Genre(string name)
         {
-            Description = description;
+            Name = name;
         }
 
-        public Genre(int id, string description)
+        public Genre(int id, string name, string description)
         {
             Id = id;
+            Name = name;
             Description = description;
         }
 
-        public int Id { get; set; }
-        public string Description { get; set; }
-        public DateTime CreatedAt { get;  }
+        public Genre(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
 
+        public int Id { get; private set; }
+        public string Name { get; private set; }
+        public string Description { get; private set; }
     }
 }

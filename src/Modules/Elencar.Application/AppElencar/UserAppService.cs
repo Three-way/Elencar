@@ -1,4 +1,5 @@
 ﻿using Elencar.Application.AppElencar.Input;
+using Elencar.Application.AppElencar.Input.ObjectValues;
 using Elencar.Application.AppElencar.Interfaces;
 using Elencar.Application.AppElencar.Output;
 using Elencar.Domain.Entities;
@@ -57,9 +58,9 @@ namespace Elencar.Application.AppElencar
         }
 
 
-        public async Task<User> Update(UserInput userInput)
+        public async Task<User> Update(UserInputUpdate userInput)
         {
-            var user = new User(userInput.Name, userInput.Email, userInput.Password, userInput.Status, new Role(userInput.Role));
+            var user = new User(userInput.Id, userInput.Name, userInput.Email, userInput.Password, userInput.Status, new Role(userInput.Role));
             if (!user.IsValidEmail(userInput.Email))
             {
                 _notification.NewNotificationBadRequest("Insira um e-mail válido!");

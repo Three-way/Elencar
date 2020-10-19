@@ -18,6 +18,13 @@ namespace Elencar.Domain.Entities
             User= user;
         }
 
+        public Actor(int id, string bio, decimal fee)
+        {
+            Id = id;
+            Bio = bio;
+            Fee = fee;
+        }
+
         public Actor(int id, string bio, decimal fee, User user)
         {
             Id = id;

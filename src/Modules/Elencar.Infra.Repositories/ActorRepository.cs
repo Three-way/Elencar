@@ -17,7 +17,6 @@ namespace Elencar.Infra.Repositories
         public ActorRepository(IConfiguration configuration)
         {
             _configuration = configuration;
-            
         }
 
         public async Task<IEnumerable<Actor>> Get()
@@ -27,21 +26,19 @@ namespace Elencar.Infra.Repositories
                 var actorList = new List<Actor>();
                 using (var con = new SqlConnection(_configuration["ConnectionString"]))
                 {
-                    var sqlCmd = @$"SELECT u.name, u.email, u.roleId, r.name as papel, a.fee, a.bio, a.userId FROM [dbo].[Actor] a
+                    var sqlCmd = @$"SELECT u.name, u.email, u.roleId, r.name as papel, a.id,a.fee, a.bio, a.userId FROM [dbo].[Actor] a
                                             INNER JOIN [dbo].[User] u on u.id = a.userId
                                             INNER JOIN [dbo].[Role] r on r.id = u.roleId";
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
                     {
                         cmd.CommandType = CommandType.Text;
                         con.Open();
-
                         var reader = await cmd
                                             .ExecuteReaderAsync()
                                             .ConfigureAwait(false);
-
                         while (reader.Read())
                         {
-                            var actor = new Actor(reader["id"].ToString(), (decimal)(reader["fee"]),
+                            var actor = new Actor((int)reader["id"], reader["bio"].ToString(), (decimal)(reader["fee"]),
                                                 new User(int.Parse(reader["userId"].ToString()), reader["name"].ToString(), reader["email"].ToString(),
                                                 new Role(int.Parse(reader["roleId"].ToString()), reader["papel"].ToString()))
                                                 );
@@ -57,13 +54,13 @@ namespace Elencar.Infra.Repositories
             }
         }
 
-        public async Task<Actor> EnrolledActor(int id)
+        public bool EnrolledActor(int id)
         {
             try
             {
                 using (var con = new SqlConnection(_configuration["ConnectionString"]))
                 {
-                    var sqlCmd = @$"SELECT u.name, u.email, u.roleId, r.name as papel, a.fee, a.bio, a.userId FROM [dbo].[Actor] a
+                    var sqlCmd = @$"SELECT u.name, u.email, u.roleId, r.name as papel, a.id,a.fee, a.bio, a.userId FROM [dbo].[Actor] a
                                             INNER JOIN [dbo].[User] u on u.id = a.userId
                                             INNER JOIN [dbo].[Role] r on r.id = u.roleId
                                                     WHERE a.userId ='{id}'";
@@ -72,19 +69,13 @@ namespace Elencar.Infra.Repositories
                         cmd.CommandType = CommandType.Text;
                         con.Open();
 
-                        var reader = await cmd
-                                            .ExecuteReaderAsync()
-                                            .ConfigureAwait(false);
+                        var reader = cmd.ExecuteReader();
 
                         while (reader.Read())
                         {
-                            var actor = new Actor(reader["id"].ToString(), (decimal)(reader["fee"]),
-                                                new User(int.Parse(reader["userId"].ToString()), reader["name"].ToString(), reader["email"].ToString(),
-                                                new Role(int.Parse(reader["roleId"].ToString()), reader["papel"].ToString()))
-                                                );
-                            return actor;
+                            return true;
                         }
-                        return default;
+                        return false;
                     }
                 }
             }
@@ -101,7 +92,7 @@ namespace Elencar.Infra.Repositories
             {
                 using (var con = new SqlConnection(_configuration["ConnectionString"]))
                 {
-                    var sqlCmd = @$"SELECT u.name, u.email, u.roleId, r.name as papel, a.fee, a.bio, a.userId FROM [dbo].[Actor] a
+                    var sqlCmd = @$"SELECT u.name, u.email, u.roleId, r.name as papel, a.id, a.fee, a.bio, a.userId FROM [dbo].[Actor] a
                                             INNER JOIN [dbo].[User] u on u.id = a.userId
                                             INNER JOIN [dbo].[Role] r on r.id = u.roleId
                                                     WHERE a.id ='{id}'";
@@ -114,6 +105,7 @@ namespace Elencar.Infra.Repositories
                                             .ConfigureAwait(false);
                         while (reader.Read())
                         {
+
                             var actor = new Actor(id,reader["bio"].ToString(), (decimal)(reader["fee"]),
                                                 new User(int.Parse(reader["userId"].ToString()), reader["name"].ToString(), reader["email"].ToString(),
                                                 new Role(int.Parse(reader["roleId"].ToString()),reader["papel"].ToString()))
@@ -131,13 +123,13 @@ namespace Elencar.Infra.Repositories
             }
         }
 
-        public async Task<Actor> Insert(Actor actor)
+        public async Task<int> Insert(Actor actor)
         {
             try
             {
                 var hasAccount = EnrolledActor(actor.User.Id);
 
-                if (hasAccount == default)
+                if (hasAccount)
                 {
                     return default;
                 }
@@ -159,13 +151,12 @@ namespace Elencar.Infra.Repositories
                     using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddWithValue("name", actor.User.Id);
-                        cmd.Parameters.AddWithValue("email", actor.Fee);
-                        cmd.Parameters.AddWithValue("password", actor.Bio);
+                        cmd.Parameters.AddWithValue("userId", actor.User.Id);
+                        cmd.Parameters.AddWithValue("fee", actor.Fee);
+                        cmd.Parameters.AddWithValue("bio", actor.Bio);
                         con.Open();
                         var id = await cmd.ExecuteScalarAsync().ConfigureAwait(false);
-                        var actorReturn = await GetByIdAsync(int.Parse(id.ToString()));
-                        return actorReturn;
+                        return int.Parse(id.ToString());
                     }
                 }
             }
@@ -176,9 +167,38 @@ namespace Elencar.Infra.Repositories
             }
         }
 
-        public async Task<Actor> Update(Actor actor)
+        public async Task<int> Update(Actor actor)
         {
-            return default;
+            try
+            {
+                using (var con = new SqlConnection(_configuration["ConnectionString"]))
+                {
+                    var sqlCmd = @$"UPDATE [dbo].[Actor] SET
+                                                bio = @bio,
+                                                fee = @fee,
+                                                status = @status
+                                              WHERE id = @id;";
+
+                    using (SqlCommand cmd = new SqlCommand(sqlCmd, con))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("bio", actor.Bio);
+                        cmd.Parameters.AddWithValue("fee", actor.Fee);
+                        cmd.Parameters.AddWithValue("status", actor.Status);
+                        cmd.Parameters.AddWithValue("id", actor.Id);
+                        con.Open();
+                        var id = await cmd.ExecuteScalarAsync().ConfigureAwait(false);
+
+                        return int.Parse(actor.Id.ToString());
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
 
         public async void Delete(int id)
@@ -198,10 +218,10 @@ namespace Elencar.Infra.Repositories
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw new Exception(ex.Message);
             }
         }
 
